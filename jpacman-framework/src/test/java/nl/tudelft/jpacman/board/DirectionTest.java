@@ -17,21 +17,29 @@ class DirectionTest {
      */
     @Test
     void testNorth() {
-        // TODO
+        Direction north = Direction.NORTH;
+        assertThat(north.getDeltaX()).isEqualTo(0);
+        assertThat(north.getDeltaY()).isEqualTo(-1);
     }
 
     @Test
     void testSouth() {
-        // TODO
+        Direction south = Direction.SOUTH;
+        assertThat(south.getDeltaX()).isEqualTo(0);
+        assertThat(south.getDeltaY()).isEqualTo(1);
     }
 
     @Test
     void testEast() {
-        // TODO
+        Direction east = Direction.EAST;
+        assertThat(east.getDeltaX()).isEqualTo(1);
+        assertThat(east.getDeltaY()).isEqualTo(0);
     }
 
     @Test
     void testWest() {
-        // TODO
+        Direction west = Direction.WEST;
+        assertThat(west.getDeltaX()).isEqualTo(-1);
+        assertThat(west.getDeltaY()).isEqualTo(0);
     }
 }

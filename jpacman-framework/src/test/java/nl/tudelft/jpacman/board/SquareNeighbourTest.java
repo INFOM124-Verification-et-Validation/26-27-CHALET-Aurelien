@@ -1,9 +1,11 @@
 package nl.tudelft.jpacman.board;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * Test suite to confirm that {@link Square}s correctly link to and report
@@ -36,7 +38,9 @@ class SquareNeighbourTest {
      */
     @Test
     void testNoNeighbourByDefault() {
-        // TODO
+        for (Direction dir : Direction.values()){
+            assertThat(square.getSquareAt(dir)).isNull();
+        }
     }
 
     /**
@@ -45,7 +49,8 @@ class SquareNeighbourTest {
      */
     @Test
     void testLinkedNeighbour() {
-        // TODO
+        square.link(neighbour,Direction.NORTH);
+        assertThat(square.getSquareAt(Direction.NORTH)).isEqualTo(neighbour);
     }
 
     /**
@@ -54,6 +59,9 @@ class SquareNeighbourTest {
      */
     @Test
     void testLinkIsOneWay() {
-        // TODO
+        square.link(neighbour,Direction.NORTH);
+        assertThat(square.getSquareAt(Direction.NORTH)).isEqualTo(neighbour);
+        assertThat(neighbour.getSquareAt(Direction.SOUTH)).isNotEqualTo(square);
+        //Attention a bien mettre l'opposé vu qu'on parle en direction
     }
 }

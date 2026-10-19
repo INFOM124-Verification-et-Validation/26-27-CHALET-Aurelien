@@ -4,6 +4,9 @@ package nl.tudelft.jpacman.board;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+
 /**
  * Test suite to confirm that {@link Unit}s correctly (de)occupy squares.
  *
@@ -30,7 +33,7 @@ class OccupantTest {
      */
     @Test
     void noStartSquare() {
-        // TODO
+        assertThat(unit.hasSquare()).isFalse();
     }
 
     /**
@@ -39,7 +42,10 @@ class OccupantTest {
      */
     @Test
     void testOccupy() {
-        // TODO
+        Square target = new BasicSquare();
+        unit.occupy(target);
+        assertThat(unit.getSquare()).isEqualTo(target);
+        assertThat(target.getOccupants()).contains(unit);
     }
 
     /**
@@ -48,6 +54,10 @@ class OccupantTest {
      */
     @Test
     void testReoccupy() {
-        // TODO
+        Square target = new BasicSquare();
+        unit.occupy(target);
+        unit.occupy(target);
+        assertThat(unit.getSquare()).isEqualTo(target);
+        assertThat(target.getOccupants()).contains(unit);
     }
 }
