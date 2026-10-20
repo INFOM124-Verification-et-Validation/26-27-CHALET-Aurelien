@@ -59,7 +59,6 @@ class ClydeTest {
         Clyde clyde = Navigation.findUnitInBoard(Clyde.class, level.getBoard());
         assertNotNull(clyde);
 
-        Optional<Direction> move = clyde.nextAiMove();
 
         assertTrue(move.isEmpty());
     }
