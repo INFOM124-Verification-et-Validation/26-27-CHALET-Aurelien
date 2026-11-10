@@ -8,9 +8,9 @@ Analyze the requirements found in `docs/scenarios.md` and derive a decision tabl
 
 |                 |        |       |        |    |
 |-----------------|--------|-------|--------|----|
-| **Collider**    | Ghost  | ??    | ??     | ?? |
-| **Collidee**    | Pellet | Ghost | Pellet | ?? |
-| **Consequence** | ??     | ??    | ??     | ?? |
+| **Collider**    | Ghost  | Player    | Player     | Ghost |
+| **Collidee**    | Pellet | Ghost | Pellet | Ghost |
+| **Consequence** | Nothing     | Kill    | Eat     | Shouldn't be possible |
 
 
 Based on the decision table above, derive a JUnit test suite for the `level.PlayerCollisions` class using the **specification-based** and **structural-based testing** frameworks. You should be as rigorous as possible here. Think not only of collisions that result in something, but also on collisions where "nothing happens".
