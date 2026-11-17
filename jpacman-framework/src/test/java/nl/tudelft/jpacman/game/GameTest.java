@@ -37,7 +37,7 @@ class GameTest {
         player = game.getPlayers().get(0);
         reset(mockLevel);
     }
-
+    //Salut a tous
     @Test
     void startWithRemainingPlayerAndPellets() {
         when(mockLevel.isAnyPlayerAlive()).thenReturn(true);
