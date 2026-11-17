@@ -35,9 +35,13 @@ Implement the following behavior.
    player and return the first direction of a shortest accessible path.
    Preserve the existing empty result when there is no player, no path, or
    the path is empty.
-3. During patrol decisions, Blinky heads towards the top-right of the board.
-   Follow a shortest accessible path to that target. Any valid shortest path
-   is acceptable when several exist.
+3. During patrol decisions, Blinky heads towards a fixed patrol target. Choose
+   it from the squares reachable by Blinky from its initial square, including
+   that square: select the smallest row index (`y`), breaking ties with the
+   largest column index (`x`). Follow a shortest accessible path to that
+   target. Any valid shortest path is acceptable when several exist.
+   If Blinky is already at the target, use chase behavior for that decision.
+   If no path to the target exists, return an empty result.
 4. Pausing and resuming the level must not reset the cycle; a new
    Blinky starts a new cycle.
 
