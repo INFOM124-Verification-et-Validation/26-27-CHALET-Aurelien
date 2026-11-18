@@ -27,3 +27,7 @@
 - [ ] I updated documentation if needed
 - [ ] I self-reviewed the code for errors
 - [ ] My code follows the Google Java Style ([https://google.github.io/styleguide/javaguide.html](https://google.github.io/styleguide/javaguide.html))
+
+## I am proud of my code and I think it is ready to be merged!
+- [ ] Yes!
+- [ ] No
