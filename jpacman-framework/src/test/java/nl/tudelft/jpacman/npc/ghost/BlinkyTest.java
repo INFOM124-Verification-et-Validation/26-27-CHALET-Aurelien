@@ -185,6 +185,7 @@ public class BlinkyTest {
 
     }
 
+
     @Test
     public void testNextAi3(){
         List<String> map = Lists.newArrayList(
