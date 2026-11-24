@@ -164,5 +164,47 @@ public class BlinkyTest {
     }
 
 
+    @Test
+    public void testNextAi2(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#      #",
+            "#   B  #",
+            "    G   ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(blinky.nextAiMove()).isEqualTo(Optional.of(Direction.NORTH));
+
+    }
+
+    @Test
+    public void testNextAi3(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#     B#",
+            "#     G#",
+            "        ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(blinky.nextAiMove()).isEqualTo(Optional.empty());
+
+    }
+
 
 }
