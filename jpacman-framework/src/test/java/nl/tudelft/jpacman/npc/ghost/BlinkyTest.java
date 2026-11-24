@@ -119,8 +119,50 @@ public class BlinkyTest {
         assertThat(coord.size()).isEqualTo(8*6);
 
         Assertions.assertNotNull(blinky);
+    }
+    @Test
+    public void testGetTarget(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#      #",
+            "#   B  #",
+            "        ",
+            "#      #",
+            "########"
+        );
 
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square targetPredict = level.getBoard().squareAt(6,1);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(target).isEqualTo(targetPredict);
 
     }
+
+    @Test
+    public void testGetFirstStep(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#      #",
+            "#   B  #",
+            "        ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(blinky.firstStepTowards(target)).isEqualTo(Optional.of(Direction.NORTH));
+
+    }
+
+
 
 }

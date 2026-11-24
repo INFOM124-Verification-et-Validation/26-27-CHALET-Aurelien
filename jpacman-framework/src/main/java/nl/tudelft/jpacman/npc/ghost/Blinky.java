@@ -97,7 +97,7 @@ public class Blinky extends Ghost {
         }else {
             incrementMovement();
             if(decision_cycle == 12){
-                setMovement();
+                setMovement(0);
             }
             if (target == null){
                 return Optional.empty();
@@ -126,7 +126,7 @@ public class Blinky extends Ghost {
         return Optional.empty();
     }
 
-    private Optional<Direction> firstStepTowards(Square target) {
+    public Optional<Direction> firstStepTowards(Square target) {
         List<Direction> path = Navigation.shortestPath(getSquare(), target, this);
         if (path != null && !path.isEmpty()) {
             return Optional.ofNullable(path.get(0));
@@ -134,7 +134,7 @@ public class Blinky extends Ghost {
         return Optional.empty();
     }
 
-    private Square getTarget(Square start) {
+    public Square getTarget(Square start) {
         if (start == null || !start.isAccessibleTo(this)) {
             return null;
         }
@@ -204,8 +204,8 @@ public class Blinky extends Ghost {
         return coords;
     }
 
-    private void setMovement(){
-        this.decision_cycle = 0;
+    public void setMovement(int value){
+        this.decision_cycle = value;
     }
 
     private void incrementMovement(){
