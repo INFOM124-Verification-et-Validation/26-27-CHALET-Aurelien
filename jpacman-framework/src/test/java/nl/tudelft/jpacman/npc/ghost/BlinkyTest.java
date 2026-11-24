@@ -3,6 +3,7 @@ package nl.tudelft.jpacman.npc.ghost;
 import com.google.common.collect.Lists;
 import nl.tudelft.jpacman.board.BoardFactory;
 import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.LevelFactory;
 import nl.tudelft.jpacman.level.Player;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -98,5 +100,112 @@ public class BlinkyTest {
         Assertions.assertNotNull(blinky);
         assertThat(blinky.nextAiMove()).isEqualTo(Optional.empty());
     }
+
+    @Test
+    public void testGetCoordMap(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#     B#",
+            "#      #",
+            "        ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        Map<Square, int[]> coord = blinky.getCoordMap(blinky.getSquare());
+        assertThat(coord.size()).isEqualTo(8*6);
+
+        Assertions.assertNotNull(blinky);
+    }
+    @Test
+    public void testGetTarget(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#      #",
+            "#   B  #",
+            "        ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square targetPredict = level.getBoard().squareAt(6,1);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(target).isEqualTo(targetPredict);
+
+    }
+
+    @Test
+    public void testGetFirstStep(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#      #",
+            "#   B  #",
+            "        ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(blinky.firstStepTowards(target)).isEqualTo(Optional.of(Direction.NORTH));
+
+    }
+
+
+    @Test
+    public void testNextAi2(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#      #",
+            "#   B  #",
+            "    G   ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(blinky.nextAiMove()).isEqualTo(Optional.of(Direction.NORTH));
+
+    }
+
+
+    @Test
+    public void testNextAi3(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#     B#",
+            "#     G#",
+            "        ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        blinky.setMovement(10);
+        Square target = blinky.getTarget(blinky.getSquare());
+
+        assertThat(blinky.nextAiMove()).isEqualTo(Optional.empty());
+
+    }
+
 
 }

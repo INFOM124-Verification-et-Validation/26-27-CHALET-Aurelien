@@ -51,6 +51,7 @@ public abstract class Ghost extends Unit {
      * @return an optional containing the move or empty if the current state of the game
      * makes the ai move impossible
      */
+
     public abstract Optional<Direction> nextAiMove();
 
     /**
