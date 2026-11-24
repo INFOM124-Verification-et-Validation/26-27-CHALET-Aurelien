@@ -3,6 +3,7 @@ package nl.tudelft.jpacman.npc.ghost;
 import com.google.common.collect.Lists;
 import nl.tudelft.jpacman.board.BoardFactory;
 import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.LevelFactory;
 import nl.tudelft.jpacman.level.Player;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -97,6 +99,28 @@ public class BlinkyTest {
         Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
         Assertions.assertNotNull(blinky);
         assertThat(blinky.nextAiMove()).isEqualTo(Optional.empty());
+    }
+
+    @Test
+    public void testGetCoordMap(){
+        List<String> map = Lists.newArrayList(
+            "########",
+            "#     B#",
+            "#      #",
+            "        ",
+            "#      #",
+            "########"
+        );
+
+        Level level = ghostMapParser.parseMap(map);
+
+        Blinky blinky = Navigation.findUnitInBoard(Blinky.class,level.getBoard());
+        Map<Square, int[]> coord = blinky.getCoordMap(blinky.getSquare());
+        assertThat(coord.size()).isEqualTo(8*6);
+
+        Assertions.assertNotNull(blinky);
+
+
     }
 
 }
